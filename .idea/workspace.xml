@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abfcb19f-a77e-4094-835c-db09fc445687" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.idea/dictionaries/danielsalazar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.idea/starter-code.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/Connections.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/Connections.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/Environment Variables.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/Environment Variables.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/Metrics.png" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/Metrics.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/http-metrics.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/http-metrics.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/iam-policy.json" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/iam-policy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercise 1/starter-code/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 1/http-metrics/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 2/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +14,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Exercise 1/http-metrics/.gitignore">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
@@ -45,17 +32,7 @@
       <list>
         <option value="$PROJECT_DIR$/Exercise 1/.gitignore" />
         <option value="$PROJECT_DIR$/Exercise 1/starter-code/.gitignore" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/Course_Material-Serverless_Apps.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -69,6 +46,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -76,22 +54,10 @@
               <item name="Course_Material-Serverless_Apps" type="b2602c69:ProjectViewProjectNode" />
               <item name="Course_Material-Serverless_Apps" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Course_Material-Serverless_Apps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Course_Material-Serverless_Apps" type="462c0819:PsiDirectoryNode" />
-              <item name="Exercise 1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Course_Material-Serverless_Apps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Course_Material-Serverless_Apps" type="462c0819:PsiDirectoryNode" />
-              <item name="Exercise 1" type="462c0819:PsiDirectoryNode" />
-              <item name="http-metrics" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -133,6 +99,7 @@
       <workItem from="1563315669362" duration="561000" />
       <workItem from="1563325148892" duration="341000" />
       <workItem from="1563327516175" duration="36000" />
+      <workItem from="1563327965847" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Added New Exercise&#10;&#10;Exercise 1 completed successfully.">
       <created>1563325475874</created>
@@ -145,12 +112,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="938000" />
+    <option name="totallyTimeSpent" value="958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -186,14 +154,16 @@
     <entry file="file://$PROJECT_DIR$/Exercise 1/package.json" />
     <entry file="file://$PROJECT_DIR$/Exercise 1/package-lock.json" />
     <entry file="file://$PROJECT_DIR$/Exercise 1/solution/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/Exercise 1/.gitignore">
+    <entry file="file://$PROJECT_DIR$/Exercise 1/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/Exercise 1/http-metrics/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/http-metrics/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        <state>
+          <caret selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Exercise 1/http-metrics/.gitignore">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />

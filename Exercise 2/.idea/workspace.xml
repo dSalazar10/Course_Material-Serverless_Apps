@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42e55729-3a43-4b18-8d38-c06db9d8d256" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/Readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/Connections.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/Environment Variables.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/Metrics.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/http-metrics.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/iam-policy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercise 1/starter-code/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="42e55729-3a43-4b18-8d38-c06db9d8d256" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,12 +102,20 @@
       <option name="presentableId" value="Default" />
       <updated>1563325523860</updated>
       <workItem from="1563325524997" duration="275000" />
-      <workItem from="1563327850619" duration="42000" />
+      <workItem from="1563327850619" duration="113000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: Remove IDE files&#10;&#10;I removed the .idea/ folder from the repository">
+      <created>1563327952465</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563327952465</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="317000" />
+    <option name="totallyTimeSpent" value="388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -153,6 +146,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: Remove IDE files&#10;&#10;I removed the .idea/ folder from the repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: Remove IDE files&#10;&#10;I removed the .idea/ folder from the repository" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
