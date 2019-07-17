@@ -1,0 +1,24 @@
+{
+  "name": "starter-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "npm init -y",
+    "install": "npm i typescript --save && npm i aws-sdk --save && npm i @types/node --save && npm i ts-node --save",
+    "build": "tsc --init && ts-node index.ts",
+    "convert": "npm run init && npm run install && npm run build",
+    "package": "tsc && node index.js && zip -r groups.zip ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.6.6",
+    "aws-sdk": "^2.493.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3",
+    "uuid": "^3.3.2"
+  }
+}
