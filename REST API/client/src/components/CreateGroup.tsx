@@ -18,32 +18,32 @@ export class CreateGroup extends React.PureComponent<
     name: '',
     description: '',
     uploadingGroup: false
-  }
+  };
 
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ name: event.target.value })
-  }
+  };
 
   handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ description: event.target.value })
-  }
+  };
 
   handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
       if (!this.state.name || !this.state.description) {
-        alert('Name and description should be provided')
+        alert('Name and description should be provided');
         return
       }
 
-      this.setUploadState(true)
+      this.setUploadState(true);
       const group = await createGroup({
         name: this.state.name,
         description: this.state.description
-      })
+      });
 
-      console.log('Created description', group)
+      console.log('Created description', group);
 
       alert('Group was created!')
     } catch (e) {
@@ -51,7 +51,7 @@ export class CreateGroup extends React.PureComponent<
     } finally {
       this.setUploadState(false)
     }
-  }
+  };
 
   setUploadState(uploadingGroup: boolean) {
     this.setState({

@@ -16,15 +16,15 @@ interface GroupsListState {
 export class GroupsList extends React.PureComponent<GroupsListProps, GroupsListState> {
   state: GroupsListState = {
     groups: []
-  }
+  };
 
   handleCreateGroup = () => {
     this.props.history.push(`/groups/create`)
-  }
+  };
 
   async componentDidMount() {
     try {
-      const groups = await getGroups()
+      const groups = await getGroups();
       this.setState({
         groups
       })

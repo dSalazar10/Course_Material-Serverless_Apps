@@ -3,10 +3,10 @@ import { apiEndpoint } from '../config'
 import { GroupUploadInfo } from '../types/GroupUploadInfo'
 
 export async function getGroups(): Promise<GroupModel[]> {
-  console.log('Fetching groups')
+  console.log('Fetching groups');
 
-  const response = await fetch(`${apiEndpoint}/groups`)
-  const result = await response.json()
+  const response = await fetch(`${apiEndpoint}/groups`);
+  const result = await response.json();
 
   return result.items
 }
@@ -22,7 +22,7 @@ export async function createGroup(newGroup: GroupUploadInfo): Promise<GroupModel
       name: newGroup.name,
       description: newGroup.description
     })
-  })
+  });
   const result = await reply.json();
   return result.newItem
 }
