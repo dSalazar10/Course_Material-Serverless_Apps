@@ -1,21 +1,21 @@
-const AWS = require('aws-sdk')
-const axios = require('axios')
+const AWS = require('aws-sdk');
+const axios = require('axios');
 
 // Name of a service, any string
-const serviceName = process.env.SERVICE_NAME
+const serviceName = process.env.SERVICE_NAME;
 // URL of a service to test
-const url = process.env.URL
+const url = process.env.URL;
 
 // CloudWatch client
 const cloudwatch = new AWS.CloudWatch();
 
 exports.handler = async (event) => {
-  let endTime
-  let requestWasSuccessful
+  let endTime;
+  let requestWasSuccessful;
 
-  const startTime = timeInMs()
+  const startTime = timeInMs();
   try {
-    await axios.get(url)
+    await axios.get(url);
     requestWasSuccessful = true
   } catch (e) {
     requestWasSuccessful = false
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
     endTime = timeInMs()
   }
 
-  const totalTime = endTime - startTime
+  const totalTime = endTime - startTime;
 
   await cloudwatch.putMetricData({
     MetricData: [
@@ -40,7 +40,7 @@ exports.handler = async (event) => {
       }
     ],
     Namespace: 'Udacity/Serveless'
-  }).promise()
+  }).promise();
 
   await cloudwatch.putMetricData({
     MetricData: [
@@ -58,7 +58,7 @@ exports.handler = async (event) => {
     ],
     Namespace: 'Udacity/Serveless'
   }).promise()
-}
+};
 
 function timeInMs() {
   return new Date().getTime()

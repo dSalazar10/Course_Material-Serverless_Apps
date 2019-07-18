@@ -3,16 +3,16 @@ import 'source-map-support/register'
 import * as AWS  from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 
-const XAWS = AWSXRay.captureAWS(AWS)
+const XAWS = AWSXRay.captureAWS(AWS);
 
-const docClient = new XAWS.DynamoDB.DocumentClient()
+const docClient = new XAWS.DynamoDB.DocumentClient();
 
-const imagesTable = process.env.IMAGES_TABLE
-const imageIdIndex = process.env.IMAGE_ID_INDEX
+const imagesTable = process.env.IMAGES_TABLE;
+const imageIdIndex = process.env.IMAGE_ID_INDEX;
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  console.log('Caller event', event)
-  const imageId = event.pathParameters.imageId
+  console.log('Caller event', event);
+  const imageId = event.pathParameters.imageId;
 
   const result = await docClient.query({
       TableName : imagesTable,
@@ -21,7 +21,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       ExpressionAttributeValues: {
           ':imageId': imageId
       }
-  }).promise()
+  }).promise();
 
   if (result.Count !== 0) {
     return {
@@ -40,4 +40,4 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     },
     body: ''
   }
-}
+};

@@ -1,8 +1,8 @@
-const AWS = require('aws-sdk')
+const AWS = require('aws-sdk');
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
   region: 'us-east-1'
-})
+});
 
 documentClient.batchWrite({
   RequestItems: {
@@ -51,7 +51,7 @@ documentClient.batchWrite({
 })
 .catch((e) => [
   console.log('Failed: ', e.message)
-])
+]);
 
 
 

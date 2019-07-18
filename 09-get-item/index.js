@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
+const AWS = require('aws-sdk');
 
-const docClient = new AWS.DynamoDB.DocumentClient()
+const docClient = new AWS.DynamoDB.DocumentClient();
 
-const groupsTable = process.env.GROUPS_TABLE
+const groupsTable = process.env.GROUPS_TABLE;
 
 exports.handler = async (event) => {
-  console.log('Processing event: ', event)
-  const groupId = event.pathParameters.groupId
+  console.log('Processing event: ', event);
+  const groupId = event.pathParameters.groupId;
 
   const result = await docClient.get({
     TableName : groupsTable,
     Key: {
       id: groupId
     }
-  }).promise()
+  }).promise();
 
   if (result.Item) {
     return {
@@ -34,4 +34,4 @@ exports.handler = async (event) => {
     },
     body: ''
   }
-}
+};

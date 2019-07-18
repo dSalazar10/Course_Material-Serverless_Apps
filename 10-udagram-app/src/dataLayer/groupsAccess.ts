@@ -2,7 +2,7 @@ import * as AWS  from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
-const XAWS = AWSXRay.captureAWS(AWS)
+const XAWS = AWSXRay.captureAWS(AWS);
 
 import { Group } from '../models/Group'
 
@@ -14,13 +14,13 @@ export class GroupAccess {
   }
 
   async getAllGroups(): Promise<Group[]> {
-    console.log('Getting all groups')
+    console.log('Getting all groups');
 
     const result = await this.docClient.scan({
       TableName: this.groupsTable
-    }).promise()
+    }).promise();
 
-    const items = result.Items
+    const items = result.Items;
     return items as Group[]
   }
 
@@ -28,7 +28,7 @@ export class GroupAccess {
     await this.docClient.put({
       TableName: this.groupsTable,
       Item: group
-    }).promise()
+    }).promise();
 
     return group
   }
@@ -36,7 +36,7 @@ export class GroupAccess {
 
 function createDynamoDBClient() {
   if (process.env.IS_OFFLINE) {
-    console.log('Creating a local DynamoDB instance')
+    console.log('Creating a local DynamoDB instance');
     return new XAWS.DynamoDB.DocumentClient({
       region: 'localhost',
       endpoint: 'http://localhost:8000'

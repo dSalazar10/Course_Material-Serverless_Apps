@@ -1,25 +1,25 @@
-'no strict'
+'no strict';
 
-const AWS = require('aws-sdk')
-var _ = require('lodash')
-const ec2 = new AWS.EC2({region: 'us-east-1'})
+const AWS = require('aws-sdk');
+var _ = require('lodash');
+const ec2 = new AWS.EC2({region: 'us-east-1'});
 
 exports.handler = async (event) => {
-  console.log('Processing event: ', event)
+  console.log('Processing event: ', event);
 
-  const reservations = await getReservations()
-  const allInstances = _.flatMap(reservations, (reservation) => reservation.Instances)
+  const reservations = await getReservations();
+  const allInstances = _.flatMap(reservations, (reservation) => reservation.Instances);
 
-  console.log('Current instances running: ', allInstances)
+  console.log('Current instances running: ', allInstances);
 
   if (allInstances.length === 0) {
-    console.log('No instances to terminate', allInstances)
+    console.log('No instances to terminate', allInstances);
     return
   }
 
-  const instanceId = selectInstanceIdToTerminate(allInstances)
+  const instanceId = selectInstanceIdToTerminate(allInstances);
   await terminateInstance(instanceId)
-}
+};
 
 async function getReservations() {
   const result = await ec2.describeInstances({
@@ -29,26 +29,26 @@ async function getReservations() {
         Values: ['running']
       }
     ]
-  }).promise()
+  }).promise();
 
-  console.log('Reservations: ', JSON.stringify(result))
+  console.log('Reservations: ', JSON.stringify(result));
 
   return result.Reservations
 }
 
 function selectInstanceIdToTerminate(instances) {
-  const instanceToTerminate = _.sample(instances)
+  const instanceToTerminate = _.sample(instances);
   return instanceToTerminate.InstanceId
 }
 
 async function terminateInstance(instanceId) {
-  console.log('Terminating instance', instanceId)
+  console.log('Terminating instance', instanceId);
 
   await ec2.terminateInstances({
     InstanceIds: [
       instanceId
     ]
-  }).promise()
+  }).promise();
 
   console.log('Instance was terminated')
 }

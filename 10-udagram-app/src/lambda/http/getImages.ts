@@ -3,18 +3,18 @@ import 'source-map-support/register'
 import * as AWS  from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 
-const XAWS = AWSXRay.captureAWS(AWS)
+const XAWS = AWSXRay.captureAWS(AWS);
 
-const docClient = new XAWS.DynamoDB.DocumentClient()
+const docClient = new XAWS.DynamoDB.DocumentClient();
 
-const groupsTable = process.env.GROUPS_TABLE
-const imagesTable = process.env.IMAGES_TABLE
+const groupsTable = process.env.GROUPS_TABLE;
+const imagesTable = process.env.IMAGES_TABLE;
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
 
-  console.log('Caller event', event)
-  const groupId = event.pathParameters.groupId
-  const validGroupId = await groupExists(groupId)
+  console.log('Caller event', event);
+  const groupId = event.pathParameters.groupId;
+  const validGroupId = await groupExists(groupId);
 
   if (!validGroupId) {
     return {
@@ -28,7 +28,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     }
   }
 
-  const images = await getImagesPerGroup(groupId)
+  const images = await getImagesPerGroup(groupId);
 
   return {
     statusCode: 201,
@@ -39,7 +39,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       items: images
     })
   }
-}
+};
 
 async function groupExists(groupId: string) {
   const result = await docClient
@@ -49,9 +49,9 @@ async function groupExists(groupId: string) {
         id: groupId
       }
     })
-    .promise()
+    .promise();
 
-  console.log('Get group: ', result)
+  console.log('Get group: ', result);
   return !!result.Item
 }
 
@@ -63,7 +63,7 @@ async function getImagesPerGroup(groupId: string) {
       ':groupId': groupId
     },
     ScanIndexForward: false
-  }).promise()
+  }).promise();
 
   return result.Items
 }

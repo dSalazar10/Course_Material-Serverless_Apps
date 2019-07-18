@@ -1,22 +1,22 @@
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
+const AWS = require('aws-sdk');
 
-const docClient = new AWS.DynamoDB.DocumentClient()
+const docClient = new AWS.DynamoDB.DocumentClient();
 
-const groupsTable = process.env.GROUPS_TABLE
+const groupsTable = process.env.GROUPS_TABLE;
 
 exports.handler = async (event) => {
-  console.log('Processing event: ', event)
+  console.log('Processing event: ', event);
 
-  let nextKey // Next key to continue scan operation if necessary
-  let limit // Maximum number of elements to return
+  let nextKey; // Next key to continue scan operation if necessary
+  let limit; // Maximum number of elements to return
   try {
     // Parse query parameters
-    nextKey = parseNextKeyParameter(event)
+    nextKey = parseNextKeyParameter(event);
     limit = parseLimitParameter(event) || 20
   } catch (e) {
-    console.log('Failed to parse query parameters: ', e.message)
+    console.log('Failed to parse query parameters: ', e.message);
     return {
       statusCode: 400,
       headers: {
@@ -33,14 +33,14 @@ exports.handler = async (event) => {
     TableName: groupsTable,
     Limit: limit,
     ExclusiveStartKey: nextKey
-  }
-  console.log('Scan params: ', scanParams)
+  };
+  console.log('Scan params: ', scanParams);
 
-  const result = await docClient.scan(scanParams).promise()
+  const result = await docClient.scan(scanParams).promise();
 
-  const items = result.Items
+  const items = result.Items;
 
-  console.log('Result: ', result)
+  console.log('Result: ', result);
 
   // Return result
   return {
@@ -54,7 +54,7 @@ exports.handler = async (event) => {
       nextKey: encodeNextKey(result.LastEvaluatedKey)
     })
   }
-}
+};
 
 /**
  * Get value of the limit parameter.
@@ -64,12 +64,12 @@ exports.handler = async (event) => {
  * @returns {number} parsed "limit" parameter
  */
 function parseLimitParameter(event) {
-  const limitStr = getQueryParameter(event, 'limit')
+  const limitStr = getQueryParameter(event, 'limit');
   if (!limitStr) {
     return undefined
   }
 
-  const limit = parseInt(limitStr, 10)
+  const limit = parseInt(limitStr, 10);
   if (limit <= 0) {
     throw new Error('Limit should be positive')
   }
@@ -85,12 +85,12 @@ function parseLimitParameter(event) {
  * @returns {Object} parsed "nextKey" parameter
  */
 function parseNextKeyParameter(event) {
-  const nextKeyStr = getQueryParameter(event, 'nextKey')
+  const nextKeyStr = getQueryParameter(event, 'nextKey');
   if (!nextKeyStr) {
     return undefined
   }
 
-  const uriDecoded = decodeURIComponent(nextKeyStr)
+  const uriDecoded = decodeURIComponent(nextKeyStr);
   return JSON.parse(uriDecoded)
 }
 
@@ -103,7 +103,7 @@ function parseNextKeyParameter(event) {
  * @returns {string} a value of a query parameter value or "undefined" if a parameter is not defined
  */
 function getQueryParameter(event, name) {
-  const queryParams = event.queryStringParameters
+  const queryParams = event.queryStringParameters;
   if (!queryParams) {
     return undefined
   }

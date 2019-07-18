@@ -1,19 +1,19 @@
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
+const AWS = require('aws-sdk');
 
-const docClient = new AWS.DynamoDB.DocumentClient()
+const docClient = new AWS.DynamoDB.DocumentClient();
 
-const groupsTable = process.env.GROUPS_TABLE
+const groupsTable = process.env.GROUPS_TABLE;
 
 exports.handler = async (event) => {
-  console.log('Processing event: ', event)
+  console.log('Processing event: ', event);
 
   const result = await docClient.scan({
     TableName: groupsTable
-  }).promise()
+  }).promise();
 
-  const items = result.Items
+  const items = result.Items;
 
   return {
     statusCode: 200,
@@ -24,4 +24,4 @@ exports.handler = async (event) => {
       items
     })
   }
-}
+};

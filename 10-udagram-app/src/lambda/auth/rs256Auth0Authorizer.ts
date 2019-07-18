@@ -23,12 +23,12 @@ pYQnaBdWtTly0yP9JBoMl9MRbNyffUdLXWlHtq2YLo8oWsLXI71cZf6ZB+sT79AA
 AiZPr1VtbQZOhrsS6iDxAR6kXwZben1qbTEBgGURU1t3frrNQ0RzxArjWf5qIFk+
 T6JsUVfTqyG1gFfoQ4EAy2NGppNTI8WAefHna5O6+Hz8WHrciCqCYbvBWPvSDGwl
 N1FDtwZVhZFsYQkSgw==
------END CERTIFICATE-----`
+-----END CERTIFICATE-----`;
 
 export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAuthorizerResult> => {
   try {
-    const jwtToken = verifyToken(event.authorizationToken)
-    console.log('User was authorized', jwtToken)
+    const jwtToken = verifyToken(event.authorizationToken);
+    console.log('User was authorized', jwtToken);
 
     return {
       principalId: jwtToken.sub,
@@ -44,7 +44,7 @@ export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAutho
       }
     }
   } catch (e) {
-    console.log('User authorized', e.message)
+    console.log('User authorized', e.message);
 
     return {
       principalId: 'user',
@@ -60,17 +60,17 @@ export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAutho
       }
     }
   }
-}
+};
 
 function verifyToken(authHeader: string): JwtToken {
   if (!authHeader)
-    throw new Error('No authentication header')
+    throw new Error('No authentication header');
 
   if (!authHeader.toLowerCase().startsWith('bearer '))
-    throw new Error('Invalid authentication header')
+    throw new Error('Invalid authentication header');
 
-  const split = authHeader.split(' ')
-  const token = split[1]
+  const split = authHeader.split(' ');
+  const token = split[1];
 
   return verify(token, cert, { algorithms: ['RS256'] }) as JwtToken
 }

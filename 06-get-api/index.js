@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const data = [
   {
@@ -16,10 +16,10 @@ const data = [
     name: 'Cities',
     description: 'Creative display of urban settings',
   }
-]
+];
 
 exports.handler = async (event) => {
-  console.log('Processing event: ', event)
+  console.log('Processing event: ', event);
 
   return {
     statusCode: 200,
@@ -30,4 +30,4 @@ exports.handler = async (event) => {
       items: data
     })
   }
-}
+};

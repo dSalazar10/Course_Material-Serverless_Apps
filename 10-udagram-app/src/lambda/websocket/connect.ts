@@ -2,32 +2,32 @@ import { APIGatewayProxyHandler, APIGatewayProxyEvent, APIGatewayProxyResult } f
 import 'source-map-support/register'
 import * as AWS  from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
-const XAWS = AWSXRay.captureAWS(AWS)
+const XAWS = AWSXRay.captureAWS(AWS);
 
-const docClient = new XAWS.DynamoDB.DocumentClient()
+const docClient = new XAWS.DynamoDB.DocumentClient();
 
-const connectionsTable = process.env.CONNECTIONS_TABLE
+const connectionsTable = process.env.CONNECTIONS_TABLE;
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  console.log('Websocket connect', event)
+  console.log('Websocket connect', event);
 
-  const connectionId = event.requestContext.connectionId
-  const timestamp = new Date().toISOString()
+  const connectionId = event.requestContext.connectionId;
+  const timestamp = new Date().toISOString();
 
   const item = {
     id: connectionId,
     timestamp
-  }
+  };
 
-  console.log('Storing item: ', item)
+  console.log('Storing item: ', item);
 
   await docClient.put({
     TableName: connectionsTable,
     Item: item
-  }).promise()
+  }).promise();
 
   return {
     statusCode: 200,
     body: ''
   }
-}
+};
