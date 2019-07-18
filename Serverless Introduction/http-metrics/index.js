@@ -1,14 +1,10 @@
 const AWS = require('aws-sdk');
 const axios = require('axios');
-
-// Name of a service, any string
 const serviceName = process.env.SERVICE_NAME;
-// URL of a service to test
 const url = process.env.URL;
-
-// CloudWatch client
 const cloudwatch = new AWS.CloudWatch();
 
+// http-metrics Lambda function
 exports.handler = async (event) => {
   let endTime;
   let requestWasSuccessful;

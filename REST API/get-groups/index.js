@@ -1,5 +1,4 @@
-'use strict';
-
+// Default data to test with
 const data = [
   {
     id: '1',
@@ -17,7 +16,7 @@ const data = [
     description: 'Creative display of urban settings',
   }
 ];
-
+// Return test data
 exports.handler = async (event) => {
   console.log('Processing event: ', event);
 
