@@ -15,7 +15,7 @@ const connectionParams = {
 const apiGateway = new AWS.ApiGatewayManagementApi(connectionParams);
 
 export const handler: S3Handler = async (event: S3Event) => {
-    // Get the key of every record and print it
+    // Get the key of every record
     for (const record of event.Records) {
         const key = record.s3.object.key;
         console.log('Processing S3 item with key ', key);
@@ -24,11 +24,11 @@ export const handler: S3Handler = async (event: S3Event) => {
         const connections = await docClient.scan({
             TableName: connectionsTable
         }).promise();
-
+        // Add info to payload
         const payload = {
             imageId: key
-        }
-
+        };
+        // Send the payload to all the connections open
         for (const connection of connections.Items) {
             const connectionId = connection.Id;
             await sendMessageToClient(connectionId, payload);
