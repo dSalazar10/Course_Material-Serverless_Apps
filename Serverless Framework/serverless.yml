@@ -36,6 +36,7 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:Query
+        - dynamodb:PutItem
       Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
     - Effect: Allow
       Action:
@@ -54,6 +55,9 @@ custom:
         contentType: application/json
         # Should read the definition of a schema from a file
         schema: ${file(models/create-group-request.json)}
+      - name: ImageRequest
+        contentType: application/json
+        schema: ${file(models/create-image-request.json)}
 
 functions:
   # /groups
@@ -80,8 +84,7 @@ functions:
             description: Create a new group
             requestModels:
               'application/json': GroupRequest
-
-  # GET GetGroups
+  # GET GetImages
   GetImages:
     handler: src/lambda/http/getImages.handler
     events:
@@ -89,6 +92,20 @@ functions:
           method: get
           path: groups/{groupId}/images
           cors: true
+  # POST CreateImage
+  CreateImage:
+    handler: src/lambda/http/createImage.handler
+    events:
+      - http:
+          method: post
+          path: groups/{groupId}/image
+          cors: true
+          reqValidatorName: RequestBodyValidator
+          documentation:
+            summary: Create a new image
+            description: Create a new image
+            requestModels:
+              'application/json': ImageRequest
 
 
   # /images

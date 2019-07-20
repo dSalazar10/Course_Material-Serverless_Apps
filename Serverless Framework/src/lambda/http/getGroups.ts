@@ -8,22 +8,22 @@ const groupsTable = process.env.GROUPS_TABLE;
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     console.log('Processing event: ', event);
-  // Collect database from DynamoDB
-  const result = await docClient.scan({
-    TableName: groupsTable
-  }).promise();
-  // Store items in variable
-  const items = result.Items;
-  // Return all the data
-  return {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify({
-      items
-    })
-  }
+    // Collect database from DynamoDB
+    const result = await docClient.scan({
+      TableName: groupsTable
+    }).promise();
+    // Store items in variable
+    const items = result.Items;
+    // Return all the data
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        items
+      })
+    }
 };
 
 
