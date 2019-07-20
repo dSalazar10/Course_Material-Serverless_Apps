@@ -18,17 +18,24 @@ provider:
   region: ${opt:region, 'us-east-2'}
   # User can  specify stage in CLI
   stage: ${opt:stage, 'dev'}
-
+  # DynamoDB Tables
   environment:
     # Either user specified stage or default stage
     GROUPS_TABLE: Groups-${self:provider.stage}
+    IMAGES_TABLE: Images-${self:provider.stage}
 
+  # DynamoDB: Scan, PutItem, GetItem
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:Scan
         - dynamodb:PutItem
+        - dynamodb:GetItem
       Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.GROUPS_TABLE}
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
 
 custom:
   documentation:
@@ -40,10 +47,11 @@ custom:
     models:
       - name: GroupRequest
         contentType: application/json
-        # Shoudl read the definition of a schema from a file
+        # Should read the definition of a schema from a file
         schema: ${file(models/create-group-request.json)}
 
 functions:
+  # GET GetGroups
   GetGroups:
     handler: src/lambda/http/getGroups.handler
     events:
@@ -51,7 +59,7 @@ functions:
           method: get
           path: groups
           cors: true
-
+  # POST CreateGroup
   CreateGroup:
     handler: src/lambda/http/createGroup.handler
     events:
@@ -59,13 +67,22 @@ functions:
           method: post
           path: groups
           cors: true
-          # Specify validator
+          # Specify validator from resources
           reqValidatorName: RequestBodyValidator
           documentation:
             summary: Create a new group
             description: Create a new group
             requestModels:
               'application/json': GroupRequest
+
+  # GET GetGroups
+  GetImages:
+    handler: src/lambda/http/getImages.handler
+    events:
+      - http:
+          method: get
+          path: groups/{groupId}/images
+          cors: true
 
 resources:
   Resources:
@@ -80,7 +97,7 @@ resources:
         ValidateRequestBody: true
         ValidateRequestParameters: false
 
-    # Get groups from Table
+    # Groups Table
     GroupsDynamoDBTable:
       # A DynamoDB Resource
       Type: AWS::DynamoDB::Table
@@ -96,5 +113,27 @@ resources:
         BillingMode: PAY_PER_REQUEST
         # Name the Table as the same as the environment variable
         TableName: ${self:provider.environment.GROUPS_TABLE}
+
+
+    # Images Table
+    ImagesDynamoDBTable:
+      # A DynamoDB Resource
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          # Complex Hash-Range fields
+          - AttributeName: groupId
+            AttributeType: S
+          - AttributeName: timestamp
+            AttributeType: S
+        KeySchema:
+          # This will be the partition key
+          - AttributeName: groupId
+            KeyType: HASH
+          - AttributeName: timestamp
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        # Name the Table as the same as the environment variable
+        TableName: ${self:provider.environment.IMAGES_TABLE}
 
 
