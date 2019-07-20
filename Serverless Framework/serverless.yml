@@ -287,4 +287,39 @@ resources:
         SourceAccount: !Ref AWS::AccountId
         SourceArn: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}
 
+    # Elastic Search - demo version
+    ImagesSearch:
+      Type: AWS::Elasticsearch::Domain
+      Properties:
+        ElasticsearchVersion: '6.3'
+        DomainName: images-search-${self:provider.stage}
+        ElasticsearchClusterConfig:
+          DedicatedMasterEnabled: false
+          # Cost minimized by only spinning up 1 machine
+          # Scale out here
+          InstanceCount: '1'
+          ZoneAwarenessEnabled: false
+          # Cost minimized by using the smallest type of machine
+          # Scale up here
+          InstanceType: t2.small.elasticsearch
+        EBSOptions:
+          EBSEnabled: true
+          Iops: 0
+          VolumeSize: 10
+          VolumeType: 'gp2'
+
+        AccessPolicies:
+          Version: '2012-10-17'
+          Statement:
+            -
+              Effect: Allow
+              # Allow everybody to access this server
+              # You can restrict access here
+              # Read more about securing ES
+              Principal:
+                AWS: '*'
+              Action: 'es:*'
+              Resource: '*'
+
+
 
