@@ -1,32 +1,14 @@
-import {CustomAuthorizerEvent, CustomAuthorizerResult, CustomAuthorizerHandler} from 'aws-lambda'
+import {CustomAuthorizerEvent, CustomAuthorizerResult} from 'aws-lambda'
 import 'source-map-support/register'
-import * as AWS from 'aws-sdk'
 import {verify} from 'jsonwebtoken';
 import {JwtToken} from "../../auth/JwtToken";
+import * as middy from 'middy'
+import {secretsManager} from 'middy/middlewares'
 
 const secretId = process.env.AUTH_0_SECRET_ID;
 const secretField = process.env.AUTH_0_SECRET_FIELD;
 
-const client = new AWS.SecretsManager();
-
-let cachedSecret: string;
-
-async function getSecret() {
-    // Check if a secret exists already
-    if (cachedSecret)
-        return cachedSecret;
-    // Get Auth0 Secret
-    const data = await client.getSecretValue({
-        SecretId: secretId
-    }).promise();
-    // Cache result
-    cachedSecret = data.SecretString;
-    // return results
-    return JSON.parse(cachedSecret);
-
-}
-
-async function verifyToken(authHeader: string): Promise<JwtToken> {
+function verifyToken(authHeader: string, secret: string): JwtToken {
     if (!authHeader) {
         throw new Error('No authorization header');
     }
@@ -39,15 +21,18 @@ async function verifyToken(authHeader: string): Promise<JwtToken> {
     const split = authHeader.split(' ');
     const token = split[1];
 
-    const secretObject = await getSecret();
-    const secret = secretObject[secretField];
-
     return verify(token, secret) as JwtToken;
 }
 
-export const handler: CustomAuthorizerHandler = async (event: CustomAuthorizerEvent): Promise<CustomAuthorizerResult> => {
+export const handler = middy( async (
+    event: CustomAuthorizerEvent,
+    context
+): Promise<CustomAuthorizerResult> => {
     try {
-        const decodedtoken = await verifyToken(event.authorizationToken);
+        const decodedtoken = verifyToken(
+            event.authorizationToken,
+            context.AUTH0_SECRET[secretField]
+        );
         console.log('User was authorized');
 
         return {
@@ -79,4 +64,15 @@ export const handler: CustomAuthorizerHandler = async (event: CustomAuthorizerEv
             }
         };
     }
-};
+});
+
+handler.use(
+    secretsManager({
+        cache: true,
+        cacheExpiryInMillis: 60000,
+        throwOnFailedCall: true,
+        secrets: {
+            AUTH0_SECRET:secretId
+        }
+    })
+)
