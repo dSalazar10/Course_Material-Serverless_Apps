@@ -87,6 +87,10 @@ custom:
 
 functions:
 
+  # Custom Authentication
+  Auth:
+    handler: src/lambda/auth/auth0Authorizer.handler
+
   # SNS Notifications
   SendUploadNotifications:
     # Environment Variables only available locally
@@ -150,7 +154,7 @@ functions:
           method: get
           path: groups
           cors: true
-  # POST CreateGroup
+  # POST CreateGroup - Authorization
   CreateGroup:
     handler: src/lambda/http/createGroup.handler
     events:
@@ -158,6 +162,8 @@ functions:
           method: post
           path: groups
           cors: true
+          # Add authorization
+          authorizer: Auth
           # Specify validator from resources
           reqValidatorName: RequestBodyValidator
           documentation:
@@ -173,7 +179,7 @@ functions:
           method: get
           path: groups/{groupId}/images
           cors: true
-  # POST CreateImage
+  # POST CreateImage - Authorization
   CreateImage:
     handler: src/lambda/http/createImage.handler
     events:
@@ -181,6 +187,8 @@ functions:
           method: post
           path: groups/{groupId}/image
           cors: true
+          # Add authorization
+          authorizer: Auth
           reqValidatorName: RequestBodyValidator
           documentation:
             summary: Create a new image
@@ -201,6 +209,19 @@ functions:
 
 resources:
   Resources:
+
+    # Custom Authentication
+    GatewayResponseDefault4XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+          gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS,POST'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
+
 
     # SNS resources
     SNSTopicPolicy:
