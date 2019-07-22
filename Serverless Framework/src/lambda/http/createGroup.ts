@@ -1,8 +1,9 @@
 import {APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult} from "aws-lambda";
 import 'source-map-support/register'
+import * as uuid from 'uuid';
+import * as AWS from 'aws-sdk';
+import {getUserId} from "../../auth/utils";
 
-const AWS = require('aws-sdk');
-const uuid = require('uuid');
 const docClient = new AWS.DynamoDB.DocumentClient();
 const groupsTable = process.env.GROUPS_TABLE;
 
@@ -12,9 +13,14 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const itemId = uuid.v4();
   // Body of request will contain the elements to be added
   const parsedBody = JSON.parse(event.body);
-  // Add item id and copy all fields to new item
+
+  const authorization = event.headers.Authorization;
+  const split = authorization.split(' ');
+  const jwtToken = split[1];
+
   const newItem = {
     id: itemId,
+    userId: getUserId(jwtToken),
     ...parsedBody
   };
   // Create a new item in DynamoDB

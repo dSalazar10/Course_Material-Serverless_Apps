@@ -75,4 +75,4 @@ handler.use(
             AUTH0_SECRET:secretId
         }
     })
-)
+);
